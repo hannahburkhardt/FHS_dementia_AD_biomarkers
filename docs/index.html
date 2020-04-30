@@ -1,380 +1,361 @@
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.2.1"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
-<div id="vis"></div>
-<script type="text/javascript">
-                    var spec = {
-  "config": {
-    "view": {"width": 400, "height": 300},
-    "mark": {"tooltip": null},
-    "scale": {"bandPaddingInner": 0.1},
-    "title": {"anchor": "start"}
-  },
-  "vconcat": [
-    {
-      "data": {"url": "scatter_data.json"},
-      "mark": "circle",
-      "encoding": {
-        "tooltip": [
-          {
-            "type": "quantitative",
-            "field": "var1_value",
-            "title": "Neuropsych variable value"
-          },
-          {
-            "type": "quantitative",
-            "field": "var2_value",
-            "title": "Acoustic variable value"
-          }
-        ],
-        "x": {
-          "type": "quantitative",
-          "field": "var1_value",
-          "scale": {"zero": false},
-          "title": "Neuropsych variable"
-        },
-        "y": {
-          "type": "quantitative",
-          "field": "var2_value",
-          "title": "Acoustic variable"
+<!DOCTYPE HTML>
+<html xml:lang="en" lang="en">
+<head>
+    <title>Thomas & Burkhardt et al. 2020</title>
+    <style media="all">
+        * {
+            padding: 0;
+            margin: 0;
         }
-      },
-      "transform": [{"filter": {"selection": "selector068"}}]
-    },
-    {
-      "hconcat": [
-        {
-          "layer": [
-            {
-              "mark": "rect",
-              "encoding": {
-                "color": {
-                  "type": "quantitative",
-                  "field": "correlation",
-                  "legend": {"orient": "left"},
-                  "scale": {"domain": [-0.45, 0.45], "scheme": "blueorange"}
-                },
-                "tooltip": [
-                  {
-                    "type": "nominal",
-                    "field": "var1_name",
-                    "title": "Neuropsych variable"
-                  },
-                  {
-                    "type": "nominal",
-                    "field": "var2_name",
-                    "title": "Acoustic variable"
-                  },
-                  {
-                    "type": "nominal",
-                    "field": "description",
-                    "title": "Acoustic variable description"
-                  },
-                  {
-                    "type": "quantitative",
-                    "field": "correlation",
-                    "format": ".2f"
-                  }
-                ],
-                "x": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelAngle": 310,
-                    "labelLimit": 280,
-                    "labelOverlap": false
-                  },
-                  "field": "var1_name",
-                  "title": "Neuropsych variable"
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 280,
-                    "minExtent": 280,
-                    "titleAlign": "right"
-                  },
-                  "field": "var2_name",
-                  "scale": {"rangeStep": 10},
-                  "title": "Acoustic variable"
-                }
-              },
-              "selection": {
-                "selector068": {
-                  "type": "single",
-                  "empty": "none",
-                  "fields": ["id"],
-                  "init": {"id": 11130}
-                }
-              },
-              "title": "Spearman correlation of patient story recall GeMAPS features with Neuropsychological assessment variables                      ",
-              "transform": [
-                {"filter": {"selection": "selector069"}},
-                {"filter": {"selection": "selector070"}},
-                {"filter": {"selection": "selector071"}},
-                {"filter": {"selection": "selector072"}},
-                {"filter": {"selection": "selector073"}}
-              ]
-            },
-            {
-              "mark": {"type": "rect", "stroke": "firebrick", "strokeWidth": 4},
-              "encoding": {
-                "color": {
-                  "type": "quantitative",
-                  "field": "correlation",
-                  "legend": {"orient": "left"},
-                  "scale": {"domain": [-0.45, 0.45], "scheme": "blueorange"}
-                },
-                "tooltip": [
-                  {
-                    "type": "nominal",
-                    "field": "var1_name",
-                    "title": "Neuropsych variable"
-                  },
-                  {
-                    "type": "nominal",
-                    "field": "var2_name",
-                    "title": "Acoustic variable"
-                  },
-                  {
-                    "type": "nominal",
-                    "field": "description",
-                    "title": "Acoustic variable description"
-                  },
-                  {
-                    "type": "quantitative",
-                    "field": "correlation",
-                    "format": ".2f"
-                  }
-                ],
-                "x": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelAngle": 310,
-                    "labelLimit": 280,
-                    "labelOverlap": false
-                  },
-                  "field": "var1_name",
-                  "title": "Neuropsych variable"
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 280,
-                    "minExtent": 280,
-                    "titleAlign": "right"
-                  },
-                  "field": "var2_name",
-                  "scale": {"rangeStep": 10},
-                  "title": "Acoustic variable"
-                }
-              },
-              "title": "Spearman correlation of patient story recall GeMAPS features with Neuropsychological assessment variables                      ",
-              "transform": [
-                {"filter": {"selection": "selector069"}},
-                {"filter": {"selection": "selector070"}},
-                {"filter": {"selection": "selector071"}},
-                {"filter": {"selection": "selector072"}},
-                {"filter": {"selection": "selector073"}},
-                {"filter": {"selection": "selector068"}}
-              ]
-            }
-          ],
-          "data": {"url": "correlation_with_details.json"}
-        },
-        {
-          "vconcat": [
-            {
-              "mark": "rect",
-              "encoding": {
-                "opacity": {
-                  "value": 0.2,
-                  "condition": {"value": 1, "selection": "selector069"}
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 220,
-                    "orient": "right",
-                    "ticks": false,
-                    "title": ""
-                  },
-                  "field": "Parameter set"
-                }
-              },
-              "selection": {
-                "selector069": {"type": "multi", "fields": ["Parameter set"]}
-              },
-              "title": "Filter by Parameter set:"
-            },
-            {
-              "data": {"name": "data-1368586b8f1107637789e49fa11c9349"},
-              "mark": "rect",
-              "encoding": {
-                "opacity": {
-                  "value": 0.2,
-                  "condition": {"value": 1, "selection": "selector070"}
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 220,
-                    "orient": "right",
-                    "ticks": false,
-                    "title": ""
-                  },
-                  "field": "Parameter group"
-                }
-              },
-              "selection": {
-                "selector070": {"type": "multi", "fields": ["Parameter group"]}
-              },
-              "title": "Filter by Parameter group:"
-            },
-            {
-              "data": {"name": "data-997f7f8cec0926bacd54ffe01600ab41"},
-              "mark": "rect",
-              "encoding": {
-                "opacity": {
-                  "value": 0.2,
-                  "condition": {"value": 1, "selection": "selector071"}
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 220,
-                    "orient": "right",
-                    "ticks": false,
-                    "title": ""
-                  },
-                  "field": "Low-level descriptor (LLD)"
-                }
-              },
-              "selection": {
-                "selector071": {
-                  "type": "multi",
-                  "fields": ["Low-level descriptor (LLD)"]
-                }
-              },
-              "title": "Filter by Low-level descriptor (LLD):"
-            },
-            {
-              "data": {"name": "data-f53cf3f50df7d16f603791220030617d"},
-              "mark": "rect",
-              "encoding": {
-                "opacity": {
-                  "value": 0.2,
-                  "condition": {"value": 1, "selection": "selector072"}
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 220,
-                    "orient": "right",
-                    "ticks": false,
-                    "title": ""
-                  },
-                  "field": "functional"
-                }
-              },
-              "selection": {
-                "selector072": {"type": "multi", "fields": ["functional"]}
-              },
-              "title": "Filter by functional:"
-            },
-            {
-              "data": {"name": "data-5245560aace0dc3cbd01af7218975cdc"},
-              "mark": "rect",
-              "encoding": {
-                "opacity": {
-                  "value": 0.2,
-                  "condition": {"value": 1, "selection": "selector073"}
-                },
-                "y": {
-                  "type": "nominal",
-                  "axis": {
-                    "labelLimit": 220,
-                    "orient": "right",
-                    "ticks": false,
-                    "title": ""
-                  },
-                  "field": "Voiced/Unvoiced regions"
-                }
-              },
-              "selection": {
-                "selector073": {
-                  "type": "multi",
-                  "fields": ["Voiced/Unvoiced regions"]
-                }
-              },
-              "title": "Filter by Voiced/Unvoiced regions:"
-            }
-          ],
-          "data": {"name": "data-76f5f9cb09de6679bbd7058ba4dfdc86"}
+
+        body {
+            margin: 0 auto 0 auto;
+            padding: 0;
+            max-width: 1200px;
+            font-family: "Avenir", "Avenir Next", Helvetica Neue, Arial;
+            font-size: 0.95em;
         }
-      ]
-    }
-  ],
-  "resolve": {"scale": {"color": "independent"}},
-  "spacing": 60,
-  "$schema": "https://vega.github.io/schema/vega-lite/v3.3.0.json",
-  "datasets": {
-    "data-76f5f9cb09de6679bbd7058ba4dfdc86": [
-      {"Parameter set": "GeMAPS"},
-      {"Parameter set": "Extended GeMAPS"}
-    ],
-    "data-1368586b8f1107637789e49fa11c9349": [
-      {"Parameter group": "Frequency related parameters"},
-      {"Parameter group": "Spectral parameters"},
-      {"Parameter group": "Energy/Amplitude related parameters"},
-      {"Parameter group": "Temporal features"},
-      {"Parameter group": "Equivalent sound level"}
-    ],
-    "data-997f7f8cec0926bacd54ffe01600ab41": [
-      {"Low-level descriptor (LLD)": "Pitch"},
-      {"Low-level descriptor (LLD)": "Formant 1 relative energy"},
-      {"Low-level descriptor (LLD)": "Formant 1 bandwidth"},
-      {"Low-level descriptor (LLD)": "Formant 1 frequency"},
-      {"Low-level descriptor (LLD)": "Formant 2 relative energy"},
-      {"Low-level descriptor (LLD)": "Formant 2 bandwidth"},
-      {"Low-level descriptor (LLD)": "Formant 2 frequency"},
-      {"Low-level descriptor (LLD)": "Formant 3 relative energy"},
-      {"Low-level descriptor (LLD)": "Formant 3 bandwidth"},
-      {"Low-level descriptor (LLD)": "Formant 3 frequency"},
-      {"Low-level descriptor (LLD)": "Harmonics-to-Noise-Ratio"},
-      {"Low-level descriptor (LLD)": "Length of voiced/unvoiced regions"},
-      {
-        "Low-level descriptor (LLD)": "Number of continuous voiced regions per second"
-      },
-      {"Low-level descriptor (LLD)": "Alpha Ratio"},
-      {"Low-level descriptor (LLD)": "Equivalent sounds level"},
-      {"Low-level descriptor (LLD)": "Hammarberg Index"},
-      {"Low-level descriptor (LLD)": "Jitter"},
-      {"Low-level descriptor (LLD)": "Harmonic difference H1–A3"},
-      {"Low-level descriptor (LLD)": "Harmonic difference H1–H2"},
-      {"Low-level descriptor (LLD)": "Rate of loudness peaks"},
-      {"Low-level descriptor (LLD)": "Loudness"},
-      {"Low-level descriptor (LLD)": "MFCC"},
-      {"Low-level descriptor (LLD)": "Shimmer"},
-      {"Low-level descriptor (LLD)": "Spectral Slope"},
-      {"Low-level descriptor (LLD)": "Spectral flux"}
-    ],
-    "data-f53cf3f50df7d16f603791220030617d": [
-      {"functional": "Arithmetic mean"},
-      {"functional": "Range of 20-th to 80-th percentile"},
-      {"functional": "20-th percentile"},
-      {"functional": "50-th percentile"},
-      {"functional": "80-th percentile"},
-      {"functional": "Coefficient of variation (Std. Dev.)"},
-      {"functional": "n/a"}
-    ],
-    "data-5245560aace0dc3cbd01af7218975cdc": [
-      {"Voiced/Unvoiced regions": "Voiced"},
-      {"Voiced/Unvoiced regions": "Unvoiced"},
-      {"Voiced/Unvoiced regions": "n/a"},
-      {"Voiced/Unvoiced regions": "Both"}
-    ]
-  }
-}
- var opt = {"renderer": "canvas", "actions": false};  /* Options for the embedding */
- vegaEmbed("#vis", spec, opt);
-</script>
+
+        a, a:visited {
+            text-decoration: none;
+            color: #7533f4;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #f4b014;
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: #492a7c;
+            background-color: inherit;
+            font-weight: normal;
+            padding: 0 0 5px 0;
+            margin: 15px 0 0 0;
+            border: none;
+            clear: right;
+        }
+
+        h1 {
+            font-size: 24pt;
+            margin: 5px 0 10px 0;
+            line-height: 28px;
+        }
+
+        h2 {
+            font-size: 14pt;
+            margin: 30px 0 15px 0;
+            letter-spacing: 0.01em;
+            border-bottom: 1px solid #ccc;
+            line-height: 20px;
+        }
+
+        h3 {
+            font-size: 13pt;
+        }
+
+        h4 {
+            font-size: 12pt;
+        }
+
+        h5 {
+            font-size: 11pt;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            font-size: 10pt;
+        }
+
+        .content {
+            margin: 0;
+            padding: 15px 20px;
+            background-color: #ffffff;
+        }
+
+        .title, .title h1, .title a {
+            color: #492a7c;
+            font-size: 24pt;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+
+        .footer {
+            border-top: 1px solid #ccc;
+            margin-top: 30px;
+            padding-top: 4px;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .footer a {
+            color: #21346B;
+        }
+
+        .footer a:hover {
+            color: #ce3333;
+        }
+
+        ul {
+            padding-left: 20px;
+            font-size: 10pt;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.2.1"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
+</head>
+<body>
+<div class="content">
+    <section class="title">
+        <a href="index.html">Assessing the Utility of Language and Voice Biomarkers to Predict Cognitive Impairment in the Framingham Heart Study Cognitive Aging Cohort Data</a>
+    </section>
+
+    <section>
+        
+
+        <p>Jason A. Thomas<sup>1‡</sup>, Hannah A. Burkhardt<sup>1‡</sup>, Safina Chaudhry<sup>1</sup>, Anthony D. Ngo<sup>1</sup>, Saransh Sharma<sup>1</sup>, Larry Zhang<sup>1</sup>, Rhoda Au<sup>2</sup>, Reza Hosseini Ghomi<sup>3</sup></p>
+
+        <p><em><sup>1</sup>University of Washington,
+            Seattle, WA;        
+        <sup>2</sup>Boston University, 
+            Boston, MA;
+            <sup>3</sup>UW Medicine, Seattle, WA;</em> <strong><sup>‡</sup>These Authors Contributed Equally</strong>
+        </p>
+
+        
+    </section>
+
+
+    <section>
+<h2>Abstract</h2>
+<p>
+<b>BACKGROUND</b>: There is a need for fast, accessible, low-cost, and accurate diagnostic methods for early detection of cognitive decline. Dementia diagnoses are usually made years after symptom onset, missing a window of opportunity for early intervention.
+<b>OBJECTIVE</b>: To evaluate the use of recorded voice features as proxies for cognitive function by using neuropsychological test measures and existing dementia diagnoses.
+<b>METHODS</b>: This study analyzed 170 audio recordings, transcripts, and paired neuropsychological test results from 135 participants selected from the Framingham Heart Study (FHS), which includes 97 recordings of cognitively normal participants and 73 recordings of cognitively impaired participants. Acoustic and linguistic features of the voice samples were correlated with cognitive performance measures to verify their association.
+<b>RESULTS</b>: Language and voice features, when combined with demographic variables, performed with an AUC of 0.942 (95% CI 0.929-0.983) in predicting cognitive status. Features with good predictive power included the acoustic features mean spectral slope in the 500-1500Hz band, variation in the F2 bandwidth, and variation in the Mel-Frequency Cepstral Coefficient (MFCC) 1; the demographic features employment, education, and age; and the text features of number of words, number of compound words, number of unique nouns, and number of proper names.
+<b>CONCLUSION</b>: Several linguistic and acoustic biomarkers show correlations and predictive power with regard to neuropsychological testing results and cognitive impairment diagnoses, including dementia. This initial study paves the way for a follow-up comprehensive study incorporating the entire FHS cohort.
+</p>
+       
+    </section>
+
+
+    <section>
+        <h2>Acoustic parameters</h2>
+        <p>The Geneva Minimalistic Acoustic Parameter Set (GeMAPS) has the followings categories of
+            variables (Eyben, 2016):</p>
+
+        <p><em>Frequency related parameters:</em></p>
+        <p>
+        <ul>
+            <li><strong>Pitch</strong>, logarithmic F<sub>0</sub> on a semitone frequency scale, starting at 27.5 Hz
+                (semitone 0).
+            </li>
+            <li><strong>Jitter</strong>, deviations in individual consecutive F<sub>0</sub> period lengths.</li>
+            <li><strong>Formant 1, 2, and 3 frequency</strong>, centre frequency of first, second, and third formant
+            </li>
+            <li><strong>Formant 1</strong>, bandwidth of first formant.</li>
+        </ul>
+        </p>
+        <p><em>Energy/Amplitude related parameters:</em></p>
+        <p>
+        <ul>
+            <li><strong>Shimmer</strong>, difference of the peak amplitudes of consecutive F<sub>0</sub> periods.</li>
+            <li><strong>Loudness</strong>, estimate of perceived signal intensity from an auditory spectrum.</li>
+            <li><strong>Harmonics-to-Noise Ratio (HNR)</strong>, relation of en- ergy in harmonic components to energy
+                in noise- like components.
+            </li>
+        </ul>
+        </p>
+
+        <p><em>Spectral (balance) parameters:</em></p>
+        <p>
+        <ul>
+            <li><strong>Alpha Ratio</strong>, ratio of the summed energy from 50–1000Hz and 1–5kHz</li>
+            <li><strong>Hammarberg Index</strong>, ratio of the strongest energy peak in the 0–2kHz region to the
+                strongest peak in the 2–5kHz region.
+            </li>
+            <li><strong>Spectral Slope 0–500Hz and 500–1500Hz</strong>, linear regression slope of the logarithmic power
+                spec- trum within the two given bands.
+            </li>
+            <li><strong>Formant 1, 2, and 3 relative energy</strong>, as well as the ratio of the energy of the spectral
+                harmonic peak at the first, second, third formant’s centre frequency to the energy of the spectral peak
+                at F<sub>0</sub>.
+            </li>
+            <li><strong>Harmonic difference H1–H2</strong>, ratio of energy of the first F<sub>0</sub> harmonic (H1) to
+                the energy of the second F<sub>0</sub> harmonic (H2).
+            </li>
+            <li><strong>Harmonic difference H1–A3</strong>, ratio of energy of the first F<sub>0</sub> harmonic (H1) to
+                the energy of the highest harmonic in the third formant range (A3).
+            </li>
+        </ul>
+        </p>
+
+        <p>The extended Geneva Minimal Acoustic Parameter Set (eGeMAPS) includes additional features, including the
+            following 6 <em>temporal features</em>:</p>
+        <p>
+        <ul>
+            <li>the <strong>rate of loudness peaks</strong>, i. e., the number of loudness peaks per second,</li>
+            <li>the <strong>mean length</strong> and the <strong>standard deviation</strong> of continuously voiced
+                regions (F<sub>0</sub> &gt; 0),
+            </li>
+            <li>the <strong>mean length</strong> and the <strong>standard deviation</strong> of <strong>unvoiced
+                regions</strong> (F<sub>0</sub> = 0; approximating pauses),
+            </li>
+            <li>the <strong>number of continuous voiced regions per second</strong> (pseudo syllable rate)</li>
+        </ul>
+        </p>
+</section>
+<section>
+        <h2>Neuropsychological parameters</h2>
+        <p>
+            The FHS administers the following standard neuropsychological tests:
+        </p>
+
+        <p><em>Taken from the Wechsler Memory Scale (WMS):</em></p>
+        <p>
+        <ul>
+            <li><strong>Logical Memory</strong>: Immediate: a short scenario is read. The participant is asked to retell
+                the story from memory with as much detail as possible. Delayed: The participant is asked to retell the
+                story once more after a delay (e.g. 30 minutes). Recognition: The participant is asked yes/no questions
+                about the story. (Maccow, 2011)
+            </li>
+            <li><strong>Paired Associate Learning</strong>: Immediate: The examiner reads 10 or 14 word pairs to the
+                examinee. Then, the examiner reads the first word of each pair, and asks the examinee to provide the
+                corresponding word. Delayed: After a delay (e.g. 30 minutes), the participant is again presented with
+                the first word of each pair learned in the immediate condition and asked to provide the corresponding
+                word. (Maccow, 2011)
+            </li>
+            <li><strong>Visual Reproduction</strong>: Immediate: A series of five designs is shown, one at a time, for
+                10 seconds each. After each design is presented, the examinee is asked to draw the design from memory.
+                Delayed: After a delay (e.g. 30 minutes), the participant is asked to draw the designs once more.
+                Recognition: the examinee is asked to choose which of six designs on a page matches the original design
+                shown during the immediate condition.
+            </li>
+        </ul>
+        </p>
+<br>
+        <p><em>Taken from the Wechsler Adult Intelligence Scale (WAIS):</em></p>
+        <p>
+        <ul>
+            <li><strong>Similarities</strong>: Describe how two words or concepts are similar. [Wikipedia]
+            </li>
+            <li><strong>Information (WAIS-R)</strong>: From the Wechsler Adult Intelligence Scale (WAIS), R edition.
+                General knowledge questions. [Wikipedia]
+            </li>
+
+            <li><strong>Block design</strong>: Put together red-and-white blocks in a pattern according to a displayed
+                model. This is timed, and some of the more difficult puzzles award bonuses for speed. (Wikipedia)
+            </li>
+
+            <li><strong>Digit span (forward and backward)</strong>: Listen to sequences of numbers orally and to repeat
+                them as heard and in reverse order. [Wikipedia]
+            </li>
+        </ul>
+        </p>
+<br>
+        <p><em>Others:</em></p>
+        <p>
+        <ul>
+            <li><strong>Boston Naming Test (BNT)</strong>: The BNT stimuli are line drawings of objects with increasing
+                naming difficulty, ranging from simple, high-frequency vocabulary (tree) to rare words (abacus).
+                Administration requires a spontaneous response within a 20-sec period; if such a response is not made,
+                two
+                kinds of prompting cues (one phonemic, one semantic) may be given. (Spreen, 1998)
+            </li>
+            <li><strong>Finger tapping test (left and right)</strong>: The finger-tapping test (FTT) is a
+                neuropsychological
+                test that examines motor functioning, specifically, motor speed and lateralized coordination. During
+                administration, the subject's palm should be immobile and flat on the board, with fingers extended, and
+                the
+                index finder placed on the counting device. One hand at a time, subjects tap their index finger on the
+                lever
+                as quickly as possible within a 10-s time interval, in order to increase the number on the counting
+                device
+                with each tap. (Springer Link, 2013)
+            </li>
+            <li><strong>Time to complete Trails</strong>: The Trail Making Test (TMT) has parts A and B. The TMT Part A
+                consists of 25 circles on a piece of paper with the numbers 1-25 written randomly in the circles. The
+                test
+                taker’s task is to start with number one and draw a line from that circle to the circle with the number
+                two
+                in it to the circle with the three in it, etc. The person continues to connect the circles in numerical
+                order until they reach number 25. The TMT Part B consists of 24 circles on a piece of paper, but rather
+                than
+                all of the circles containing numbers, half of the circles have the numbers 1-12 in them and the other
+                half
+                (12) contain the letters A-L. The person taking the test has the more difficult task of drawing a line
+                from
+                one circle to the next in ascending order; however, he must alternate the circles with numbers in them
+                (1-13) with circles with letters in them (A-L). In other words, he is to connect the circles in order
+                like
+                this: 1-A-2-B-3-C-4-D-5-E and so on.
+                (Heerema, 2019)
+            </li>
+            <li><strong>Hooper Visual Organization Test</strong>: This test has 30 line drawings, each showing a common
+                object such as a ball or a pencil. Each drawing has been cut into several pieces. The pieces are
+                scattered
+                on the page like parts of a puzzle. The client's task is to tell you what the object is. The VOT has no
+                time
+                limit. (Mevius, 2019)
+            </li>
+            <li><strong>Verbal Fluency</strong>: Animals only: Participants have to produce as many animal names as
+                possible
+                in 1 minute. Exclude animals: Participants have to produce as many words as possible that start with the
+                given letter (e.g. F or A) in 1 minute, avoiding proper names.
+            </li>
+            <li><strong>Wide range achievement test (reading)</strong>: Assesses reading for words with irregular
+                sound-to-spelling correspondence, for example <em>unanimous</em>.
+            </li>
+        </ul>
+        </p>
+
+    </section>
+
+    <section>
+        <h2>Interactive heatmap</h2>
+        <p>This visualization is a heatmap of the associations between the various acoustic and neuropsychological
+            variables. </p>
+
+        <p>The figure implements filtering and details on demand behavior. <b>Click on a box, or shift-click on multiple
+            boxes, to filter. Double click on a box to clear the filter. Click on a cell in order to view the scatter
+            plot of the two variables</b>. This allows on-demand investigation of the relationships between the
+            variables. The default box selected shows a positive correlation between the acoustic variable 'jitter'
+            (deviations in individual consecutive F0 period lengths) and time to complete a neuropsychological task 
+            (worse cognitive performance)</p>
+
+        <div id="vis2"></div>
+        <br>
+        <script type="text/javascript" src="vis2.js"></script>
+
+        <p><em>Interactive Heatmap allowing hover display of values, filtering, and details on demand via cell selection
+            to then display (top) a scatterplot allowing further examination of the relationship between the two
+            selected variables.</em></p>
+
+    </section>
+
+    <section>
+        <h2>Acknowledgements &amp; Disclosures &amp; References</h2>
+        <p>This study was supported in part by the National Library of Medicine (NLM) Training Grant T15LM007442.</p>
+
+        <p>Dr. Hosseini Ghomi’s work was supported by the VA Advanced Fellowship Program in Parkinson’s Disease.</p>
+
+        <p>Disclosures: Dr. Hosseini Ghomi is a stockholder of NeuroLex
+            Laboratories.</p>
+
+        <p>Eyben, F., Scherer, K. R., Schuller, B. W., Sundberg, J., Andre, E., Busso, C., … Truong, K. P. (2016). The
+            Geneva Minimalistic Acoustic Parameter Set (GeMAPS) for Voice Research and Affective Computing. IEEE
+            Transactions on Affective Computing, 7(2), 190–202. https://doi.org/10.1109/TAFFC.2015.2457417</p>
+
+        <p>Spreen & Risser. (1998). Acquired Aphasia (Third Edition)</p>
+        <p>Maccow, G. (2011). WMS-IV: Administration, Scoring, Basic Interpretation. Pearson.</p>
+        <p>Heerema, E. (2019). Administration, Scoring, and Interpretation of the Trail Making Test. Available at https://www.verywellhealth.com/dementia-screening-tool-the-trail-making-test-98624</p>
+        <p> Springer Link. (2013). Finger-Tapping Test. Encyclopedia of Autism Spectrum Disorders - 2013 Edition. Available at https://link.springer.com/referenceworkentry/10.1007%2F978-1-4419-1698-3_343.</p>
+        <p>Mevius, J. (2019). Hooper Visual Organization Test (VOT). Elderly Driving Assessments. Available at http://elderlydrivingassessments.com/hooper.php</p>
+    </section>
+    <div class="footer">
+        <a href="http://www.washington.edu">University of Washington</a>
+    </div>
+</div>
+</body>
+</html> 
